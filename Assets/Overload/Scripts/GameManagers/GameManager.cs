@@ -21,6 +21,8 @@ namespace Assets.Overland.Scripts.GameManagers
 
             player.HP.Subscribe(x => OnPlayerDamage(x));
             player.HP.Where(x => x <= 0).Subscribe(_ => OnPlayerDie());
+
+            player.OnTouchTargetLand.Subscribe(_ => OnGameClear());
         }
 
         void OnPlayerDamage(float damage)
@@ -31,6 +33,11 @@ namespace Assets.Overland.Scripts.GameManagers
         void OnPlayerDie()
         {
             // UI 変更用
+        }
+
+        void OnGameClear()
+        {
+            Debug.Log("Game Clear");
         }
     }
 }

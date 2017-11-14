@@ -10,6 +10,7 @@ namespace Assets.Overland.Scripts.Players
     {
         public PlayerParameters parameters;
         public ReactiveProperty<float> HP = new ReactiveProperty<float>(100);
+        public Subject<Unit> OnTouchTargetLand = new Subject<Unit>();
 
         // Use this for initialization
         void Start()
