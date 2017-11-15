@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigidbody2d;
     private float speed = 3;
     private bool jump;
+    private float jumpButtonElapsed = 0;
     private float move;
     private float castBottomOffset = 0.9f;
     private Vector3 leftEdge;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
 
         this.JumpPower = GetComponent<PlayerCore>().parameters.JumpPower;
+        Debug.Log(JumpPower);
     }
 
     // Update is called once per frame
@@ -37,7 +39,7 @@ public class PlayerController : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position - transform.up * this.castBottomOffset);
         Debug.DrawLine(rightEdge, rightEdge - transform.up * this.castBottomOffset);
 
-        this.jump = Input.GetButtonDown("Jump");
+        this.jump = Input.GetButton("Jump") && jumpButtonElapsed < 0.19f;
         this.move = Input.GetAxisRaw("Horizontal");
     }
 
@@ -48,21 +50,29 @@ public class PlayerController : MonoBehaviour
         var castCenter = Physics2D.Linecast(transform.position, transform.position - transform.up * this.castBottomOffset, groundLayer);
         var castRight = Physics2D.Linecast(rightEdge, rightEdge - transform.up * this.castBottomOffset, groundLayer);
 
+        jumpButtonElapsed += Time.deltaTime;
+
+        if (this.jump)
+        {
+            this.rigidbody2d.AddForce(Vector2.up * this.JumpPower, ForceMode2D.Force);
+        }
+
         if (castLeft.collider || castCenter || castRight.collider)
         {
-            this.flying = false;
-            if (/*"!this.takingOff && */this.jump)
-            {
-                //transform.position = new Vector2(transform.position.x, transform.position.y + this.castBottomOffset);
-                this.rigidbody2d.AddForce(Vector2.up * this.JumpPower);
-                this.takingOff = true;
-            }
+            this.jumpButtonElapsed = 0;
+        //    this.flying = false;
+        //    if (/*"!this.takingOff && */this.jump)
+        //    {
+        //        //transform.position = new Vector2(transform.position.x, transform.position.y + this.castBottomOffset);
+        //        this.rigidbody2d.AddForce(Vector2.up * this.JumpPower);
+        //        this.takingOff = true;
+        //    }
         }
-        else
-        {
-            this.takingOff = false;
-            this.flying = true;
-        }
+        //else
+        //{
+        //    this.takingOff = false;
+        //    this.flying = true;
+        //}
 
         var x = 0f;
         var y = 0f;

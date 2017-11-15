@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parameters:
-    JumpPower: 400
+    JumpPower: 100
     MoveSpeed: 1
 --- !u!212 &212411805872747784
 SpriteRenderer:
