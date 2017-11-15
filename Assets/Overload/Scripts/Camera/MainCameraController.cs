@@ -6,7 +6,7 @@ public class MainCameraController : MonoBehaviour {
 
     public GameObject Player;
 
-    private float offsetX = 7;
+    private float offsetX = 6;
 	
 	// Update is called once per frame
 	void Update () {
