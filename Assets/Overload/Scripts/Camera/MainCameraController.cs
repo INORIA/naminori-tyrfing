@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MainCameraController : MonoBehaviour {
 
-    public GameObject Player;
-
+    private GameObject Player;
     private float offsetX = 6;
 	
 	// Update is called once per frame

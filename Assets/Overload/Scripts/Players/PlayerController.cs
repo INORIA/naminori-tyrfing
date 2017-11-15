@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private float speed = 3;
     private bool jump;
     private float move;
-    private float castBottomOffset = 0.55f;
+    private float castBottomOffset = 0.9f;
     private Vector3 leftEdge;
     private Vector3 rightEdge;
     private bool flying = false;
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         if (castLeft.collider || castCenter || castRight.collider)
         {
             this.flying = false;
-            if (!this.takingOff && this.jump)
+            if (/*"!this.takingOff && */this.jump)
             {
                 //transform.position = new Vector2(transform.position.x, transform.position.y + this.castBottomOffset);
                 this.rigidbody2d.AddForce(Vector2.up * this.JumpPower);
@@ -66,18 +66,18 @@ public class PlayerController : MonoBehaviour
 
         var x = 0f;
         var y = 0f;
-        if (!flying && (move > 0 || move < 0))
-        {
-            var hit = castRight.collider ? castRight : castLeft;
-            var slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-            x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(this.move) * this.speed;
-            y = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(this.move) * this.speed;
-        }
-        else if (flying)
-        {
+        //if (!flying && (move > 0 || move < 0))
+        //{
+        //    var hit = castRight.collider ? castRight : castLeft;
+        //    var slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+        //    x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(this.move) * this.speed;
+        //    y = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(this.move) * this.speed;
+        //}
+        //else if (flying)
+        //{
             x = move * this.speed;
             y = velocity.y;
-        }
+        //}
 
         var v = transform.position + new Vector3(x, y, transform.position.z);
         Debug.DrawLine(transform.position, v);

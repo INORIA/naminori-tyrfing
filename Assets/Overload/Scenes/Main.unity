@@ -658,7 +658,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a56bbb0b2cbc145a4b7d21ee272bf075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
 --- !u!1 &776925550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,7 +1146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52333cda2ccd4fa3a5c6385cfc996e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 1089398585236576, guid: 759859a67b4b34b7d932feef40a2ccd4,
+  PlayerPrefab: {fileID: 1047459333686614, guid: b16bdac6040f042e7a55d60246b40c3c,
     type: 2}
 --- !u!114 &1404643421
 MonoBehaviour:
@@ -1184,6 +1183,7 @@ GameObject:
   - component: {fileID: 1520084707}
   - component: {fileID: 1520084706}
   - component: {fileID: 1520084705}
+  - component: {fileID: 1520084709}
   m_Layer: 4
   m_Name: Collision
   m_TagString: Untagged
@@ -1222,7 +1222,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1520084704}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1270,6 +1270,17 @@ Transform:
   m_Father: {fileID: 1098981556}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1520084709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1520084704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a022cd373bd44bd88580ef085c73e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1734172428
 GameObject:
   m_ObjectHideFlags: 0
