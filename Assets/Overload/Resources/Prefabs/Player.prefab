@@ -175,6 +175,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 16
+  AutoMove: 0
+  TimeToWait: 1
+  InputEnabled: 1
 --- !u!114 &114889133020849602
 MonoBehaviour:
   m_ObjectHideFlags: 1

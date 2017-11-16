@@ -7,6 +7,8 @@ using Assets.Overland.Scripts.Players;
 public class PlayerController : MonoBehaviour
 {
     public LayerMask groundLayer;
+    public bool AutoMove = false;
+    public float TimeToWait = 1f;
 
     [HideInInspector]
     public bool InputEnabled = true;
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 rightEdge;
     private bool flying = false;
     private bool takingOff = false;
+    private float waitElapsed = 0f;
 
     // Use this for initialization
     void Start()
@@ -43,6 +46,15 @@ public class PlayerController : MonoBehaviour
 
         this.jump = Input.GetButton("Jump") && jumpButtonElapsed < 0.19f;
         this.move = Input.GetAxisRaw("Horizontal");
+
+        if (waitElapsed <= this.TimeToWait)
+        {
+            waitElapsed += Time.deltaTime;
+            this.InputEnabled = false;
+        } else {
+            this.InputEnabled = true;
+        }
+
     }
 
     private void FixedUpdate()
@@ -62,13 +74,13 @@ public class PlayerController : MonoBehaviour
         if (castLeft.collider || castCenter || castRight.collider)
         {
             this.jumpButtonElapsed = 0;
-        //    this.flying = false;
-        //    if (/*"!this.takingOff && */this.jump)
-        //    {
-        //        //transform.position = new Vector2(transform.position.x, transform.position.y + this.castBottomOffset);
-        //        this.rigidbody2d.AddForce(Vector2.up * this.JumpPower);
-        //        this.takingOff = true;
-        //    }
+            //    this.flying = false;
+            //    if (/*"!this.takingOff && */this.jump)
+            //    {
+            //        //transform.position = new Vector2(transform.position.x, transform.position.y + this.castBottomOffset);
+            //        this.rigidbody2d.AddForce(Vector2.up * this.JumpPower);
+            //        this.takingOff = true;
+            //    }
         }
         //else
         //{
@@ -87,8 +99,16 @@ public class PlayerController : MonoBehaviour
         //}
         //else if (flying)
         //{
-        if (this.InputEnabled) {
-            x = move * this.speed;
+        if (this.InputEnabled)
+        {
+            if (AutoMove)
+            {
+                x = +1 * this.speed;
+            }
+            else
+            {
+                x = this.move * this.speed;
+            }
         }
         y = velocity.y;
         //}
