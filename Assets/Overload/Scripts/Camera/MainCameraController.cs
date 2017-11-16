@@ -17,7 +17,7 @@ public class MainCameraController : MonoBehaviour
         {
             var pX = player.transform.position.x;
             transform.position = new Vector3(pX + this.offsetX, transform.position.y, transform.position.z);
-        } else {
+        } else if (player != null) {
             var pos = transform.position;
             pos.x = this.MaxX;
             transform.position = pos;

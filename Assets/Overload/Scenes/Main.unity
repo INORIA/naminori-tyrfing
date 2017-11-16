@@ -1098,6 +1098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a56bbb0b2cbc145a4b7d21ee272bf075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxX: 81.85203
 --- !u!1001 &717176915
 Prefab:
   m_ObjectHideFlags: 0
@@ -1690,6 +1691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverView: {fileID: 51224934}
+  GameClearView: {fileID: 1587830078}
 --- !u!4 &1404643422
 Transform:
   m_ObjectHideFlags: 0
