@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
 {
     public LayerMask groundLayer;
 
+    [HideInInspector]
+    public bool InputEnabled = true;
+
     private float JumpPower = 400;
     private Rigidbody2D rigidbody2d;
     private float speed = 3;
@@ -26,7 +29,6 @@ public class PlayerController : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
 
         this.JumpPower = GetComponent<PlayerCore>().parameters.JumpPower;
-        Debug.Log(JumpPower);
     }
 
     // Update is called once per frame
@@ -52,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
         jumpButtonElapsed += Time.deltaTime;
 
-        if (this.jump)
+        if (this.jump && this.InputEnabled)
         {
             this.rigidbody2d.AddForce(Vector2.up * this.JumpPower, ForceMode2D.Force);
         }
@@ -85,8 +87,10 @@ public class PlayerController : MonoBehaviour
         //}
         //else if (flying)
         //{
+        if (this.InputEnabled) {
             x = move * this.speed;
-            y = velocity.y;
+        }
+        y = velocity.y;
         //}
 
         var v = transform.position + new Vector3(x, y, transform.position.z);

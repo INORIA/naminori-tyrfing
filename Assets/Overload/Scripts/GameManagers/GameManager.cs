@@ -4,13 +4,18 @@ using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
 using Assets.Overland.Scripts.Players;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Overland.Scripts.GameManagers
 {
     public class GameManager : MonoBehaviour
     {
+        public GameObject GameOverView;
+        public GameObject GameClearView;
+
         private PlayerProvider playerProvider;
         private PlayerCore player;
+        private bool gameOver = false;
 
         // Use this for initialization
         void Start()
@@ -25,6 +30,14 @@ namespace Assets.Overland.Scripts.GameManagers
             player.OnTouchTargetLand.Subscribe(_ => OnGameClear());
         }
 
+        private void Update()
+        {
+            if (this.gameOver && Input.GetMouseButtonDown(0))
+            {
+                SceneManager.LoadScene("Title");
+            }
+        }
+
         void OnPlayerDamage(float damage)
         {
             // UI 変更用
@@ -33,11 +46,15 @@ namespace Assets.Overland.Scripts.GameManagers
         void OnPlayerDie()
         {
             // UI 変更用
+            GameOverView.SetActive(true);
+            this.gameOver = true;
         }
 
         void OnGameClear()
         {
-            Debug.Log("Game Clear");
+            GameClearView.SetActive(true);
+            this.gameOver = true;
+            player.GetComponent<PlayerController>().InputEnabled = false;
         }
     }
 }
