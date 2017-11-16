@@ -9,16 +9,30 @@ namespace Assets.Overland.Scripts.Enemies
     {
         public GameObject LancePrefab;
 
+        private GameObject player;
+        private bool attacked = false;
+        private float attackOffset = 10f;
+
         // Use this for initialization
         void Start()
         {
-            Fire();
         }
 
         // Update is called once per frame
         void Update()
         {
-
+            if (this.player == null)
+            {
+                this.player = GameObject.FindGameObjectWithTag("Player");
+            }
+            else if (this.player.transform.position.x >= (transform.position.x - attackOffset))
+            {
+                if (!attacked)
+                {
+                    attacked = true;
+                    Fire();
+                }
+            }
         }
 
         void Fire()
