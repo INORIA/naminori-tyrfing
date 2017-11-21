@@ -47,14 +47,20 @@ public class PlayerController : MonoBehaviour
         this.jump = Input.GetButton("Jump") && jumpButtonElapsed < 0.19f;
         this.move = Input.GetAxisRaw("Horizontal");
 
+        if (!this.jump)
+        {
+            this.jump = Input.GetMouseButton(0) && jumpButtonElapsed < 0.19f;
+        }
+
         if (waitElapsed <= this.TimeToWait)
         {
             waitElapsed += Time.deltaTime;
             this.InputEnabled = false;
-        } else {
+        }
+        else
+        {
             this.InputEnabled = true;
         }
-
     }
 
     private void FixedUpdate()

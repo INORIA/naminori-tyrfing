@@ -8,6 +8,7 @@ namespace Assets.Overland.Scripts.Enemies
     public class ThrowLance : MonoBehaviour
     {
         public GameObject LancePrefab;
+        public GameObject LanceHold;
 
         private GameObject player;
         private bool attacked = false;
@@ -38,6 +39,7 @@ namespace Assets.Overland.Scripts.Enemies
         void Fire()
         {
             var lance = Instantiate(LancePrefab, transform.position, Quaternion.identity);
+            LanceHold.SetActive(false);
             lance.GetComponent<Rigidbody2D>().AddForce(new Vector2(-200, -200));
             Destroy(lance, 2f);
         }
